@@ -19,7 +19,15 @@ module.exports.create = async function (req, res, next) {
 
 module.exports.list = async function (req, res, next) {
 
-        /// Add your code here.
+    try {
+        let list = await CarModel.find({}); // Find all documents in the collection
+
+        res.json(list);
+    }
+    catch(err){
+        console.log(error);
+        next(error);
+    }
 }
 
 module.exports.carGet = async function (req, res, next) {
@@ -69,7 +77,7 @@ module.exports.update = async function (req, res, next) {
 
 module.exports.remove = async function (req, res, next) {
     try {
-        let uID = ;
+        let uID = req.params.carID;
 
         let result = await CarModel.deleteOne({ _id: uID });
         console.log(result);
